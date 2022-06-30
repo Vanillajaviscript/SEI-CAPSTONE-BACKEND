@@ -3,17 +3,15 @@
 ////////////////////////
 require('dotenv').config();
 const express = require('express');
+const PORT = process.env.PORT || 3001;
 const app = express();
-const logger = require('morgan');
 const colors = require('colors');
-const cors = require('cors');
-const connectDB = require('./config/connection')
-
+const connectDB = require('./config/connect');
+// const middleware = require('./middleware/middleware');
 
 ////////////////////////
 // Server Listener
 ////////////////////////
-
 const start = async () => {
   try {
     connectDB();

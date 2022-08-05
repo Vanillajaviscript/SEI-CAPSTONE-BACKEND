@@ -1,10 +1,10 @@
-const bcrypt = require('brcrypt');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require("../models/user.js");
 
 const secret = "test";
 
-export const signup = async (req, res) => {
+const signup = async (req, res) => {
   const {email, password, firstName, lastName} = req.body;
   try {
     const oldUser = await UserModel.findOne({email});
@@ -30,4 +30,6 @@ export const signup = async (req, res) => {
     res.status(500).json({message: "Error"});
     console.log(error)
   }
-}
+};
+
+module.exports = signup

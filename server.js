@@ -9,6 +9,7 @@ const colors = require('colors');
 const connectDB = require('./config/connect');
 const logger = require('morgan');
 const cors = require('cors');
+const userRouter = require('./routes/user.js');
 
 ////////////////////////
 // Middleware
@@ -17,7 +18,7 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
+app.use("/users", userRouter)
 ////////////////////////
 // Server Listener
 ////////////////////////

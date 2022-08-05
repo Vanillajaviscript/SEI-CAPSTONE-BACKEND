@@ -4,6 +4,24 @@ const UserModel = require("../models/user.js");
 
 const secret = "test";
 
+const signin = async (req, res) => {
+  const {email, password} = req.body;
+  try {
+    const oldUser = await UserModel.findOne({email});
+    if(!oldUser) return res.status(404).json({message: "User does not exist"})
+
+    const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
+
+    if(!isPasswordCorrect) return res.status(400).json({message: "Invalid credentials"});
+
+    const token = jwt.sign({email: oldUser.email, id: oldUser._id}, secret, {expiresIn: "24h"});
+    res.status(200).json({result: oldUser, token})
+  } catch(error) {
+    res.status(500).json({message: "Error"});
+    console.log(error)
+  }
+}
+
 const signup = async (req, res) => {
   const {email, password, firstName, lastName} = req.body;
   try {

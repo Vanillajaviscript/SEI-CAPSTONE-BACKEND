@@ -1,8 +1,9 @@
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require("../models/user.js");
 
-const secret = "test";
+const secret = process.env.SECRET;
 
 const signin = async (req, res) => {
   const {email, password} = req.body;

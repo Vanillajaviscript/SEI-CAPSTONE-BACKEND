@@ -9,7 +9,7 @@ const UserModel = require("../models/user.js");
 const secret = process.env.SECRET;
 
 ////////////////////////////
-// Signin Password/JWT
+// Signin 
 ////////////////////////////
 const signin = async (req, res) => {
   const {email, password} = req.body;
@@ -29,36 +29,36 @@ const signin = async (req, res) => {
   }
 }
 
-////////////////////////////
-// Signin Hash
-////////////////////////////
-const signup = async (req, res) => {
-  const {email, password, firstName, lastName} = req.body;
-  try {
-    const oldUser = await UserModel.findOne({email});
-    if(oldUser) {
-      return res.status(400).json({message: "User already exists"})
-    }
+// ////////////////////////////
+// // Signup
+// ////////////////////////////
+// const signup = async (req, res) => {
+//   const {email, password, firstName, lastName} = req.body;
+//   try {
+//     const oldUser = await UserModel.findOne({email});
+//     if(oldUser) {
+//       return res.status(400).json({message: "User already exists"})
+//     }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+//     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const result = await UserModel.create({
-      email,
-      password: hashedPassword,
-      name: `${firstName} ${lastName}`,
-    });
+//     const result = await UserModel.create({
+//       email,
+//       password: hashedPassword,
+//       name: `${firstName} ${lastName}`,
+//     });
 
-    const token = jwt.sign({email: result.email, id: result._id}, secret, {
-      expiresIn: "24h",
-    });
+//     const token = jwt.sign({email: result.email, id: result._id}, secret, {
+//       expiresIn: "24h",
+//     });
 
-    res.status(201).json({result, token});
+//     res.status(201).json({result, token});
 
-  } catch(error) {
-    res.status(500).json({message: "Error"});
-    console.log(error)
-  }
-};
+//   } catch(error) {
+//     res.status(500).json({message: "Error"});
+//     console.log(error)
+//   }
+// };
 
-module.exports = signup;
-module.exports = signin;
+
+module.exports = signin

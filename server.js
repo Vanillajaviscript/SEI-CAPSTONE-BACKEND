@@ -7,13 +7,9 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const connectDB = require('./config/connect');
 const userRouter = require('./routes/user.js');
-// const middleware = require('./middleware/middleware.js');
-// ////////////////////////
-// // Middleware
-// ////////////////////////
-// app.use(middleware)
 const logger = require('morgan');
 const cors = require('cors');
+
 ////////////////////////
 // Middleware
 ////////////////////////

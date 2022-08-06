@@ -3,8 +3,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require("../models/user.js");
 
+////////////////////////////
+// Secret
+////////////////////////////
 const secret = process.env.SECRET;
 
+////////////////////////////
+// Signin Password/JWT
+////////////////////////////
 const signin = async (req, res) => {
   const {email, password} = req.body;
   try {
@@ -23,6 +29,9 @@ const signin = async (req, res) => {
   }
 }
 
+////////////////////////////
+// Signin Hash
+////////////////////////////
 const signup = async (req, res) => {
   const {email, password, firstName, lastName} = req.body;
   try {

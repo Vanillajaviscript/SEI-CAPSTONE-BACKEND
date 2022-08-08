@@ -4,7 +4,7 @@
 require('dotenv').config();
 const express = require('express');
 const PORT = process.env.PORT || 3001;
-const app = express();
+const app = require('express')();
 const connectDB = require('./config/connect');
 const userRouter = require('./routes/user.js');
 const logger = require('morgan');
